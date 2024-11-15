@@ -1,0 +1,21 @@
+var express = require('express');
+var router = express.Router();
+const userModel = require("./users");
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index');
+});
+
+router.post("/send",async function(req,res){
+  const createdmessage = await userModel.create({
+    name:req.body.name,
+    company:req.body.company,
+    email:req.body.email,
+    description:req.body.description
+  });
+  console.log(createdmessage);
+  res.render('index');
+});
+
+module.exports = router;
